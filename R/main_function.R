@@ -1,4 +1,6 @@
 
+globalVariables("i")
+
 #' Download Information on Box Office Results for Movies
 #'
 #' @param start_date
@@ -7,7 +9,7 @@
 #' year/month/date format.
 #' @param end_date
 #' If you use a date range, this will be your end date in the range (inclusive).
-#' Dates must be in year/month/date format
+#' Dates must be in year/month/day format
 #' @param number_of_results
 #' How many results for each day (e.g. an input of 10 will return the top 10
 #' movies that day)
@@ -21,6 +23,7 @@
 #' Data frame returning info on the name of the movie, its daily gross,
 #'  gross-to-date, and gross-per-theater for each date inputted.
 #' @export
+#'
 #' @examples
 #' # This will give you all movies from October 10th
 #' # 2012 from the-numbers.com
@@ -48,6 +51,11 @@
 #'
 #' # Multiple dates with the-numbers as source
 #' \dontrun{boxoffice(c("12-10-10", "13-4-15"), source = "numbers")}
+#'
+#' @import lubridate
+#' @import rvest
+#' @import foreach
+#' @import xml2
 
 
 
@@ -57,10 +65,6 @@ boxoffice <- function(start_date,
                       source = "mojo",
                       verbose = FALSE) {
 
-  temp_start <- gsub("([0-9]*)\\-.*", "\\1", start_date)
-  if (nchar(temp_start) < 2){
-    start_date <- gsub("(.*)", "0\\1", start_date)
-  }
 
   if (source == "mojo"){
     if (is.null(end_date)){
@@ -74,10 +78,6 @@ boxoffice <- function(start_date,
     } else {
       if (!is.null(end_date)){
 
-        temp_end <- gsub("([0-9]*)\\-.*", "\\1", end_date)
-        if (nchar(temp_end) < 2){
-          end_date <- gsub("(.*)", "0\\1", end_date)
-        }
 
         cleaner(mojo_date_range(start_date, end_date, number_of_results, verbose
                                 ))
@@ -97,10 +97,6 @@ boxoffice <- function(start_date,
       } else {
         if (!is.null(end_date)){
 
-          temp_end <- gsub("([0-9]*)\\-.*", "\\1", end_date)
-          if (nchar(temp_end) < 2){
-            end_date <- gsub("(.*)", "0\\1", end_date)
-          }
 
           cleaner(numbers_date_range(start_date, end_date, number_of_results,
                                      verbose

@@ -13,7 +13,7 @@ you want, or the list of dates you want. Dates must be in
 year/month/date format.}
 
 \item{end_date}{If you use a date range, this will be your end date in the range (inclusive).
-Dates must be in year/month/date format}
+Dates must be in year/month/day format}
 
 \item{number_of_results}{How many results for each day (e.g. an input of 10 will return the top 10
 movies that day)}
@@ -57,5 +57,6 @@ number_of_results = 10, source = "numbers")}
 
 # Multiple dates with the-numbers as source
 \dontrun{boxoffice(c("12-10-10", "13-4-15"), source = "numbers")}
+
 }
 

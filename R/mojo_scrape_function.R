@@ -1,17 +1,5 @@
-#' @import lubridate
-#' @import rvest
-#' @import foreach
-#' @import xml2
 
-
-globalVariables("i")
-
-library(lubridate)
-library(rvest)
-library(foreach)
-
-mojo_single_date <- function(date, number_of_results = NULL, verbose = FALSE,
-                             parallel = FALSE){
+mojo_single_date <- function(date, number_of_results = NULL, verbose = FALSE){
 
 
   try(boxofficemojo <- read_html(paste("http://www.boxofficemojo.com/",
@@ -28,11 +16,11 @@ mojo_single_date <- function(date, number_of_results = NULL, verbose = FALSE,
 
 
   if  (nrow(movie_name) < 1){
-    return(NULL)
+    return()
   }
 
   if (is.na(movie_name$movie_name[1])){
-    return(NULL)
+    return()
   }
 
   daily_gross <- boxofficemojo %>% html_nodes("center td font > b") %>%
@@ -53,7 +41,7 @@ mojo_single_date <- function(date, number_of_results = NULL, verbose = FALSE,
 
   if  (nrow(gross_per_theater) != nrow(movie_name) |
            nrow(gross_to_date) != nrow(movie_name)) {
-    return(NULL)
+    return()
              }
 
   box_storage <- cbind(movie_name, daily_gross)
@@ -111,11 +99,11 @@ mojo_date_range <- function(start_date, end_date, number_of_results = NULL,
 
 
     if (nrow(movie_name) < 1){
-      return(NULL)
+      return()
     }
 
     if (is.na(movie_name$movie_name[1])){
-      return(NULL)
+      return()
     }
 
     daily_gross <- boxofficemojo %>% html_nodes("center td font > b") %>%
@@ -138,8 +126,7 @@ mojo_date_range <- function(start_date, end_date, number_of_results = NULL,
     box_storage <- cbind(box_storage, gross_to_date)
     box_storage <- cbind(box_storage, gross_per_theater)
     box_storage$date <- ymd(date_range$date_range[i])
-}
-    storage_final <- rbind(storage_final, box_storage)
+
 
     if (verbose){
       message(paste(date_range$date_range[i], " ",
@@ -154,6 +141,11 @@ mojo_date_range <- function(start_date, end_date, number_of_results = NULL,
 
 
 
+    storage_final <- rbind(storage_final, box_storage)
+}
+
+
+
   row.names(storage_final) <- 1:nrow(storage_final)
   return(storage_final)
 }
@@ -164,9 +156,9 @@ mojo_multiple_dates <- function(dates, number_of_results = NULL,
   dates <- ymd(dates)
   dates <- data.frame(dates)
 
-  storage_final <- cleaner(mojo_single_date(dates$dates[1],
+  storage_final <- mojo_single_date(dates$dates[1],
                                     number_of_results,
-                                    verbose))
+                                    verbose)
 
   foreach(i = 2:nrow(dates)) %do%{
 
@@ -184,11 +176,11 @@ mojo_multiple_dates <- function(dates, number_of_results = NULL,
 
 
     if (nrow(movie_name) < 1){
-      return(NULL)
+      return()
     }
 
     if (is.na(movie_name$movie_name[1])){
-      return(NULL)
+      return()
     }
 
     daily_gross <- boxofficemojo %>% html_nodes("center td font > b") %>%
@@ -212,13 +204,11 @@ mojo_multiple_dates <- function(dates, number_of_results = NULL,
     box_storage <- cbind(box_storage, gross_per_theater)
     box_storage$date <- ymd(dates$dates[i])
 
-    }
-
     if (!is.null(number_of_results)){
       box_storage <- box_storage[1:number_of_results, ]
     }
 
-    storage_final <- rbind(storage_final, box_storage)
+
 
     if (verbose){
       message(paste(dates$dates[i], " ",
@@ -228,6 +218,11 @@ mojo_multiple_dates <- function(dates, number_of_results = NULL,
     }
 
 
-  row.names(storage_final) <- 1:nrow(storage_final)
+
+    storage_final <- rbind(storage_final, box_storage)
+    }
+
+
+#  row.names(storage_final) <- 1:nrow(storage_final)
   return(storage_final)
 }

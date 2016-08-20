@@ -1,14 +1,3 @@
-#' @import lubridate
-#' @import rvest
-#' @import foreach
-#' @import xml2
-#'
-library(lubridate)
-library(rvest)
-library(foreach)
-
-globalVariables("i")
-
 # Scrapes single date from the-numbers.com
 numbers_single_date <- function(date, number_of_results = NULL,
                                 verbose = FALSE){
@@ -31,7 +20,7 @@ numbers_single_date <- function(date, number_of_results = NULL,
   movie_name <- data.frame(movie_name)
 
   if (nrow(movie_name) < 1){
-    return(NULL)
+    return()
   }
 
   daily_gross <- numbers %>% html_nodes(".data:nth-child(5)") %>%
@@ -95,22 +84,25 @@ numbers_date_range <- function(start_date, end_date, number_of_results = NULL,
 
   foreach(i = 2:nrow(date_range)) %do%{
 
+
+
  try(box_storage <- numbers_single_date(date_range$date_range[i],
                                   number_of_results,
                                   verbose = FALSE))
+    storage_final <- rbind(storage_final, box_storage)
+
+    if (verbose){
+      message(paste(date_range$date_range[i], " ",
+                    round((i / nrow(date_range)) * 100, digits = 3),
+                    "%",
+                    " completed", sep = ""))
+    }
   }
 
 
 
- if (verbose){
-   message(paste(date_range$date_range[i], " ",
-                 round((i / nrow(date_range)) * 100, digits = 3),
-                 "%",
-                 " completed", sep = ""))
 
 
-    storage_final <- rbind(storage_final, box_storage)
-}
   row.names(storage_final) <- 1:nrow(storage_final)
   return(storage_final)
 }
@@ -137,7 +129,7 @@ numbers_multiple_dates <- function(dates, number_of_results = NULL,
 
 
     if (verbose){
-      message(paste(dates$dates[i], " ",
+      message(paste(ymd(dates$dates[i]), " ",
                     round((i / nrow(dates)) * 100, digits = 3),
                     "%",
                     " completed", sep = ""))
@@ -145,6 +137,8 @@ numbers_multiple_dates <- function(dates, number_of_results = NULL,
 
 
   }
+
+
 
   row.names(storage_final) <- 1:nrow(storage_final)
   return(storage_final)
