@@ -4,24 +4,17 @@
 \alias{boxoffice}
 \title{Download Information on Box Office Results for Movies}
 \usage{
-boxoffice(start_date, end_date = NULL, number_of_results = NULL,
-  source = "mojo", verbose = FALSE)
+boxoffice(dates, site = c("mojo", "numbers"), top_n = NULL)
 }
 \arguments{
-\item{start_date}{Enter the first date in the range, or the specific date
-you want, or the list of dates you want. Dates must be in
-year/month/date format.}
+\item{dates}{A vector of dates to scrape}
 
-\item{end_date}{If you use a date range, this will be your end date in the range (inclusive).
-Dates must be in year/month/day format}
+\item{site}{Whether you want to get data from boxofficemojo.com or the-numbers.com.
+Accepts inputs of "mojo" (default) or "numbers".}
 
-\item{number_of_results}{How many results for each day (e.g. an input of 10 will return the top 10
-movies that day)}
-
-\item{source}{Whether you want to get data from boxofficemojo.com or the-numbers.com.}
-
-\item{verbose}{Provides progress updates (which dates have been scraped and the
-percent total done)}
+\item{top_n}{The number of results to return for each day. If NULL (default) returns
+all results, otherwise just top n  results (e.g. top_n = 5, returns 5 top
+movies per date).}
 }
 \value{
 Data frame returning info on the name of the movie, its daily gross,
@@ -31,32 +24,14 @@ Data frame returning info on the name of the movie, its daily gross,
 Download Information on Box Office Results for Movies
 }
 \examples{
-# This will give you all movies from October 10th
-# 2012 from the-numbers.com
-boxoffice("12-10-10", source = "numbers")
+boxoffice(dates = as.Date("2017-12-25"))
 
-# This will do the same as above but from
-# boxofficemojo.com. Each site has
-# slightly differing results. Note that
-# boxofficemojo is default
-# and does not need to be manually inputted
-\dontrun{boxoffice("12-10-10")}
+# Uses the-numbers.com website.
+boxoffice(dates = as.Date("2017-12-25"), site = "numbers")
 
-# Date range from October 10th - October 11th 2012
-\dontrun{boxoffice("12-10-10", "12-10-11")}
-
-# Same as above, only grab top 10 movies
-\dontrun{boxoffice("12-10-10", "12-10-11", number_of_results = 10)}
-
-# Same as above, with the-numbers.com as source
-\dontrun{boxoffice("12-10-10", "12-10-11",
-number_of_results = 10, source = "numbers")}
-
-# Multiple dates
-\dontrun{boxoffice(c("12-10-10", "13-4-15"))}
-
-# Multiple dates with the-numbers as source
-\dontrun{boxoffice(c("12-10-10", "13-4-15"), source = "numbers")}
+# Returns only top 10 (daily) grossing movies#'
+boxoffice(dates = as.Date("2017-12-25"), top_n = 10)
+# Uses the dates of Christmas and New Years Eve 2017
+boxoffice(dates = as.Date(c("2017-12-25", "2017-12-31")))
 
 }
-
