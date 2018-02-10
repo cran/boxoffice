@@ -1,4 +1,4 @@
-b5e5708c43a65e83e39bde675a3ea84f *DESCRIPTION
+bad2e9e11ed8f90b0941871803480732 *DESCRIPTION
 24aa5f8a859af2e5c6be529f642fdf56 *NAMESPACE
 eab9d1a2a23fdd2f89dcd39dfa894aec *NEWS.md
 d504cff4e5c00b0d118b547fc49775cb *R/main_function.R
@@ -7,12 +7,12 @@ d504cff4e5c00b0d118b547fc49775cb *R/main_function.R
 a5250ff78cc344f13e8de9d12ed6ba6c *build/vignette.rds
 3ca138f201102549ac3642e235d1be8a *inst/doc/Using-boxoffice.R
 ea8e9fb68fdf10ebb2b18b46e65c7c82 *inst/doc/Using-boxoffice.Rmd
-a09d899c5c0181fd716f5f2748896a68 *inst/doc/Using-boxoffice.html
+d33db26ef4eb6dea496fac513e779eb6 *inst/doc/Using-boxoffice.html
 64c0d4957aa53f5d5f88b2eacd3ef4cc *man/boxoffice.Rd
 969e280fde40d56a30966c38c444d674 *tests/testthat.R
 508fb7836f179b908b1c88a22d48df43 *tests/testthat/test-column-names.R
 b290d093ba1ba3dbad95c5953e23ae64 *tests/testthat/test-column-types.R
-ec3564fb0e69041253c66f6187e33761 *tests/testthat/test-column-values.R
+b3f8732af91d149e25928853410542be *tests/testthat/test-column-values.R
 563a20baee3bd02074bdc353d34837d2 *tests/testthat/test-dimmensions.R
 114d7f3f03edbcd7c74eee03c039c064 *tests/testthat/test-errors-silent.R
 ea8e9fb68fdf10ebb2b18b46e65c7c82 *vignettes/Using-boxoffice.Rmd
