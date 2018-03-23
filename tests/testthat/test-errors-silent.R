@@ -6,16 +6,19 @@ test_that("returns silent", {
   expect_silent(boxoffice(dates = as.Date("2017-12-25")))
   expect_silent(boxoffice(dates = as.Date("2017-12-25"), top_n = 10))
 
-  expect_silent(boxoffice(dates = as.Date("2017-12-25"), site = "numbers"))
-  expect_silent(boxoffice(dates = as.Date("2017-12-25"), site = "numbers",
-                          top_n = 10))
-
   expect_silent(boxoffice(dates = christmas))
   expect_silent(boxoffice(dates = christmas, top_n = 10))
 
-  expect_silent(boxoffice(dates = christmas, site = "numbers"))
-  expect_silent(boxoffice(dates = christmas, site = "numbers", top_n = 10))
 
+})
+
+test_that("returns warning", {
+  expect_message(boxoffice(dates = as.Date("2017-12-25"), site = "mojo"))
+  expect_message(boxoffice(dates = as.Date("2017-12-25"), site = "mojo",
+                          top_n = 10))
+
+  expect_message(boxoffice(dates = christmas, site = "mojo"))
+  expect_message(boxoffice(dates = christmas, site = "mojo", top_n = 10))
 })
 
 
@@ -54,6 +57,8 @@ test_that("wrong inputs cause error - dates", {
   expect_error(boxoffice(dates = 0))
   expect_error(boxoffice(dates = "2012-12-25"))
   expect_error(boxoffice(dates = c(10, as.Date(c("2012-01-01")))))
+  expect_error(boxoffice(dates = as.Date(Sys.Date())))
+  expect_error(boxoffice(dates = as.Date("2025-01-01")))
   expect_error(boxoffice(dates = Sys.Date()))
   expect_error(boxoffice(dates = as.Date(c("2012-01-01",
                                            "2013-01-01", "2025-12-25"))))

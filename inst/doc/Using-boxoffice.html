@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jacob Kaplan" />
 
-<meta name="date" content="2018-02-10" />
+<meta name="date" content="2018-03-23" />
 
 <title>Using boxoffice</title>
 
@@ -280,12 +280,12 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Using boxoffice</h1>
 <h4 class="author"><em>Jacob Kaplan</em></h4>
-<h4 class="date"><em>2018-02-10</em></h4>
+<h4 class="date"><em>2018-03-23</em></h4>
 
 
 
 <p><code>boxoffice()</code> is a simple package to get information about daily box office results of movies. It scrapes the webpages of either <a href="http://www.boxofficemojo.com" class="uri">http://www.boxofficemojo.com</a> or <a href="https://www.the-numbers.com/" class="uri">https://www.the-numbers.com/</a> for this information. The data it returns are the following:</p>
-<ol type="1">
+<ol style="list-style-type: decimal">
 <li>Movie name<br />
 </li>
 <li>The studio that produced that movie<br />
@@ -306,14 +306,14 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>In essence, it shows how well each movie performed on a given day.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">movies &lt;-<span class="st"> </span>boxoffice<span class="op">::</span><span class="kw">boxoffice</span>(<span class="dt">date =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2015-10-31&quot;</span>))</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">dim</span>(movies)</a></code></pre></div>
-<pre><code>## [1] 40  9</code></pre>
+<pre><code>## [1] 46  9</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">movies[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ]</a></code></pre></div>
-<pre><code>##                   movie distributor   gross percent_change theaters
-## 1           The Martian         Fox 4564809             31     3218
-## 2       Bridge of Spies          BV 3588796             45     2873
-## 3            Goosebumps        Sony 3326075              9     3618
-## 4 The Last Witch Hunter        LG/S 2023321             36     3082
-## 5  Hotel Transylvania 2        Sony 1905762              7     2962
+<pre><code>##                   movie      distributor   gross percent_change theaters
+## 1           The Martian 20th Century Fox 4564809             31     3218
+## 2       Bridge of Spies      Walt Disney 3588796             45     2873
+## 3            Goosebumps    Sony Pictures 3326075              9     3618
+## 4 The Last Witch Hunter        Lionsgate 2023321             36     3082
+## 5  Hotel Transylvania 2    Sony Pictures 1905762              7     2962
 ##   per_theater total_gross days       date
 ## 1        1419   179446657   30 2015-10-31
 ## 2        1249    43200132   16 2015-10-31
@@ -321,13 +321,15 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 4         656    17377961    9 2015-10-31
 ## 5         643   153858782   37 2015-10-31</code></pre>
 <p>There are three parameters for <code>boxoffice()</code>: <code>dates</code>, <code>site</code>, and <code>top_n</code>.</p>
-<p><code>dates</code> are simply an input dates (in Date format) that you want to get information on. In accepts either a single date or a vector of dates. <code>site</code> indicates which site you want to scrape: the-numbers.com or boxofficemojo.com. The accepted inptus are “mojo” which is the default site or “numbers”. Both sites are very similar and provide nearly identical results. All results are ordered in descending order by how much that movie made on that day. For example, the top selling movie of the day is the first value while the worst selling movie is the last value.</p>
+<p><code>dates</code> are simply an input dates (in Date format) that you want to get information on. In accepts either a single date or a vector of dates. <code>site</code> indicates which site you want to scrape: the-numbers.com or boxofficemojo.com. The accepted inptus are “numbers” which is the default site or “mojo”. Both sites are very similar and provide nearly identical results. All results are ordered in descending order by how much that movie made on that day. For example, the top selling movie of the day is the first value while the worst selling movie is the last value.</p>
+<p>Note that the terms of use for boxofficemojo.com does not permit scraping without their written permission. If you do not have written permission, please ask them for it or change or only scrape from the-numbers.com.</p>
 <p>Here is the first 10 movie names for both sites. We will use the <code>top_n</code> parameter to only return the top 10 selling movies.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">mojo &lt;-<span class="st"> </span>boxoffice<span class="op">::</span><span class="kw">boxoffice</span>(<span class="dt">dates =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2015-10-31&quot;</span>), </a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">                             <span class="dt">site =</span> <span class="st">&quot;mojo&quot;</span>, <span class="dt">top_n =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">numbers &lt;-<span class="st"> </span>boxoffice<span class="op">::</span><span class="kw">boxoffice</span>(<span class="dt">dates =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2015-10-31&quot;</span>),</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">                             <span class="dt">site =</span> <span class="st">&quot;numbers&quot;</span>, <span class="dt">top_n =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">cbind</span>(mojo[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)], numbers[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)])</a></code></pre></div>
+<a class="sourceLine" id="cb5-2" data-line-number="2">                             <span class="dt">site =</span> <span class="st">&quot;mojo&quot;</span>, <span class="dt">top_n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>## The terms of use for boxofficemojo.com does not permit scraping without their written permission. If you do not have written permission, please ask them for it or change the site parameter to 'numbers' to use the-numbers.com which does not forbid scraping without permission.</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">numbers &lt;-<span class="st"> </span>boxoffice<span class="op">::</span><span class="kw">boxoffice</span>(<span class="dt">dates =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2015-10-31&quot;</span>),</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">                             <span class="dt">site =</span> <span class="st">&quot;numbers&quot;</span>, <span class="dt">top_n =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw">cbind</span>(mojo[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)], numbers[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)])</a></code></pre></div>
 <pre><code>##                                       movie   gross
 ## 1                               The Martian 4564809
 ## 2                           Bridge of Spies 3588796
