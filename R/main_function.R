@@ -3,7 +3,7 @@
 #' A vector of dates to scrape
 #' @param site
 #' Whether you want to get data from boxofficemojo.com or the-numbers.com.
-#' Accepts inputs of "mojo" (default) or "numbers".
+#' Accepts inputs of "numbers" (default) or "mojo".
 #' @param top_n
 #' The number of results to return for each day. If NULL (default) returns
 #' all results, otherwise just top n  results (e.g. top_n = 5, returns 5 top
@@ -18,7 +18,7 @@
 #' # Uses boxofficemojo.com website.
 #' boxoffice(dates = as.Date("2017-12-25"), site = "mojo")
 #'
-#' # Returns only top 10 (daily) grossing movies#'
+#' # Returns only top 10 (daily) grossing movies
 #' boxoffice(dates = as.Date("2017-12-25"), top_n = 10)
 #' # Uses the dates of Christmas and New Years Eve 2017
 #' boxoffice(dates = as.Date(c("2017-12-25", "2017-12-31")))
@@ -28,7 +28,8 @@ boxoffice <- function(dates,
                       site = c("mojo", "numbers"),
                       top_n = NULL) {
 
-  useragent <- paste0("Mozilla/5.0 (compatible; a bot using the R boxoffice",
+  useragent <- paste0(
+    "Mozilla/5.0 (compatible; a bot using the R boxoffice",
                         " package; https://github.com/jacobkap/boxoffice/)")
 
   if (identical(site, c("mojo", "numbers"))) site <- "numbers"
@@ -37,7 +38,7 @@ boxoffice <- function(dates,
   stopifnot(is.null(top_n) || is.numeric(top_n))
 
   if (any(dates >= (Sys.Date()))) {
-    stop("Yesterday's data is latest available. Please choose another date")
+    stop("Yesterday's data is the latest available. Please choose another date")
   }
 
   if (!tolower(site) %in% c("mojo", "numbers")) {
@@ -77,7 +78,7 @@ boxoffice <- function(dates,
 
     page <- httr::content(page, "parsed", encoding = "UTF-8")
     if (is.null(page)) {
-      message(url_dates[i], "culd not be scraped.")
+      message(url_dates[i], "could not be scraped. Please check the website to make sure the date is available or check your internet connection.")
     } else {
     if (tolower(site) == "mojo") {
       page <- mojo_site(page)
@@ -107,7 +108,7 @@ boxoffice <- function(dates,
   if (nrow(results) > 0) {
   return(results)
   } else {
-    stop("No results found. Please check dates inputted against website.")
+    stop("No results found. Please check the website to make sure the dates are available.")
   }
 
 }

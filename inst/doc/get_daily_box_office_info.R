@@ -1,3 +1,9 @@
+## ----setup, include = FALSE----------------------------------------------
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
 ## ------------------------------------------------------------------------
 movies <- boxoffice::boxoffice(date = as.Date("2015-10-31"))
 dim(movies)

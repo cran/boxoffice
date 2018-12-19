@@ -10,7 +10,7 @@ boxoffice(dates, site = c("mojo", "numbers"), top_n = NULL)
 \item{dates}{A vector of dates to scrape}
 
 \item{site}{Whether you want to get data from boxofficemojo.com or the-numbers.com.
-Accepts inputs of "mojo" (default) or "numbers".}
+Accepts inputs of "numbers" (default) or "mojo".}
 
 \item{top_n}{The number of results to return for each day. If NULL (default) returns
 all results, otherwise just top n  results (e.g. top_n = 5, returns 5 top
@@ -30,7 +30,7 @@ boxoffice(dates = as.Date("2017-12-25"))
 # Uses boxofficemojo.com website.
 boxoffice(dates = as.Date("2017-12-25"), site = "mojo")
 
-# Returns only top 10 (daily) grossing movies#'
+# Returns only top 10 (daily) grossing movies
 boxoffice(dates = as.Date("2017-12-25"), top_n = 10)
 # Uses the dates of Christmas and New Years Eve 2017
 boxoffice(dates = as.Date(c("2017-12-25", "2017-12-31")))
