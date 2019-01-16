@@ -12,14 +12,14 @@
 
 <meta name="author" content="Jacob Kaplan" />
 
-<meta name="date" content="2018-12-19" />
+<meta name="date" content="2019-01-16" />
 
 <title>Get Top Grossing movies</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
@@ -81,7 +81,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -278,7 +300,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Get Top Grossing movies</h1>
 <h4 class="author"><em>Jacob Kaplan</em></h4>
-<h4 class="date"><em>2018-12-19</em></h4>
+<h4 class="date"><em>2019-01-16</em></h4>
 
 
 
@@ -300,10 +322,10 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt;   american_box_office international_box_office total_box_office</span></a>
 <a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt; 2           936662225               1116648995       2053311220</span></a>
 <a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt; 3           760507625               2015837654       2776345279</span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt; 4           700059566                647011693       1347071259</span></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; 5           678815482               1370000000       2048815482</span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt; 4           700059566                648300000       1348359566</span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; 5           678815482               1369988242       2048803724</span></a>
 <a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt; 6           659363944               1548844451       2208208395</span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">#&gt; 7           652270625                996622583       1648893208</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">#&gt; 7           652270625                996584239       1648854864</span></a></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># International</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">movies &lt;-<span class="st"> </span>boxoffice<span class="op">::</span><span class="kw">top_grossing</span>(<span class="dt">type =</span> <span class="st">&quot;international&quot;</span>)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; Please note that these numbers are not adjusted for inflation.</span></a>
@@ -318,10 +340,10 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;   american_box_office international_box_office total_box_office</span></a>
 <a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; 2           760507625               2015837654       2776345279</span></a>
 <a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; 3           659363944               1548844451       2208208395</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; 4           678815482               1370000000       2048815482</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; 4           678815482               1369988242       2048803724</span></a>
 <a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; 5           353007020               1165715774       1518722794</span></a>
 <a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; 6           936662225               1116648995       2053311220</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; 7           225764765               1009143255       1234908020</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; 7           225764765               1009137963       1234902728</span></a></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Worldwide</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">movies &lt;-<span class="st"> </span>boxoffice<span class="op">::</span><span class="kw">top_grossing</span>(<span class="dt">type =</span> <span class="st">&quot;worldwide&quot;</span>)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; Please note that these numbers are not adjusted for inflation.</span></a>
@@ -337,8 +359,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; 2           760507625               2015837654       2776345279</span></a>
 <a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; 3           659363944               1548844451       2208208395</span></a>
 <a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 4           936662225               1116648995       2053311220</span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; 5           678815482               1370000000       2048815482</span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; 6           652270625                996622583       1648893208</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; 5           678815482               1369988242       2048803724</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; 6           652270625                996584239       1648854864</span></a>
 <a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; 7           353007020               1165715774       1518722794</span></a></code></pre></div>
 </div>
 <div id="ranks" class="section level2">
@@ -357,10 +379,10 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt;   american_box_office international_box_office total_box_office</span></a>
 <a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; 2           936662225               1116648995       2053311220</span></a>
 <a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; 3           760507625               2015837654       2776345279</span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; 4           700059566                647011693       1347071259</span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; 5           678815482               1370000000       2048815482</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; 4           700059566                648300000       1348359566</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; 5           678815482               1369988242       2048803724</span></a>
 <a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; 6           659363944               1548844451       2208208395</span></a>
-<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; 7           652270625                996622583       1648893208</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; 7           652270625                996584239       1648854864</span></a></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># </span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">movies &lt;-<span class="st"> </span>boxoffice<span class="op">::</span><span class="kw">top_grossing</span>(<span class="dt">ranks =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; Please note that these numbers are not adjusted for inflation.</span></a>
@@ -375,16 +397,16 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw">head</span>(movies)</a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;      rank                                movie year_released</span></a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 2       1 Star Wars Ep. VII: The Force Awakens          2015</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 35     34        Guardians of the Galaxy Vol 2          2017</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 56     55               Spider-Man: Homecoming          2017</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 65     64                         Transformers          2007</span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 1019 1000  Star Trek III: The Search for Spock          1984</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 36     34        Guardians of the Galaxy Vol 2          2017</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 57     55               Spider-Man: Homecoming          2017</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 66     64                         Transformers          2007</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 1029 1000      Alice Through the Looking Glass          2016</span></a>
 <a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt;      american_box_office international_box_office total_box_office</span></a>
 <a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; 2              936662225               1116648995       2053311220</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; 35             389813101                472504158        862317259</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; 56             334201140                545869746        880070886</span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; 65             319246193                389026399        708272592</span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; 1019            76471046                 10528954         87000000</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; 36             389813101                472504158        862317259</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; 57             334201140                545965210        880166350</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; 66             319246193                389026399        708272592</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; 1029            77042381                199886991        276929372</span></a></code></pre></div>
 </div>
 
 

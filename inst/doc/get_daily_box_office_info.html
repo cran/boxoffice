@@ -12,14 +12,14 @@
 
 <meta name="author" content="Jacob Kaplan" />
 
-<meta name="date" content="2018-12-19" />
+<meta name="date" content="2019-01-16" />
 
 <title>Get Daily Movie Sales</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
@@ -81,7 +81,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -278,7 +300,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Get Daily Movie Sales</h1>
 <h4 class="author"><em>Jacob Kaplan</em></h4>
-<h4 class="date"><em>2018-12-19</em></h4>
+<h4 class="date"><em>2019-01-16</em></h4>
 
 
 
@@ -319,7 +341,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt; 4         656    17377961    9 2015-10-31</span></a>
 <a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; 5         643   153858782   37 2015-10-31</span></a></code></pre></div>
 <p>There are three parameters for <code>boxoffice()</code>: <code>dates</code>, <code>site</code>, and <code>top_n</code>.</p>
-<p><code>dates</code> are simply an input dates (in Date format) that you want to get information on. In accepts either a single date or a vector of dates. <code>site</code> indicates which site you want to scrape: the-numbers.com or boxofficemojo.com. The accepted inptus are “numbers” which is the default site or “mojo”. Both sites are very similar and provide nearly identical results. All results are ordered in descending order by how much that movie made on that day. For example, the top selling movie of the day is the first value while the worst selling movie is the last value.</p>
+<p><code>dates</code> are simply an input dates (in Date format) that you want to get information on. In accepts either a single date or a vector of dates. <code>site</code> indicates which site you want to scrape: the-numbers.com or boxofficemojo.com. The accepted inputs are “numbers” which is the default site or “mojo”. Both sites are very similar and provide nearly identical results. All results are ordered in descending order by how much that movie made on that day. For example, the top selling movie of the day is the first value while the worst selling movie is the last value.</p>
 <p>Note that the terms of use for boxofficemojo.com does not permit scraping without their written permission. If you do not have written permission, please ask them for it or change or only scrape from the-numbers.com.</p>
 <p>Here is the first 10 movie names for both sites. We will use the <code>top_n</code> parameter to only return the top 10 selling movies.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">mojo &lt;-<span class="st"> </span>boxoffice<span class="op">::</span><span class="kw">boxoffice</span>(<span class="dt">dates =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2015-10-31&quot;</span>), </a>
@@ -350,7 +372,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt; 8                  Crimson Peak 1393460</span></a>
 <a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt; 9           Our Brand is Crisis 1260523</span></a>
 <a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt; 10 The Met: Live in HD - Tannh… 1150000</span></a></code></pre></div>
-<p>The results are close. Some movie name spellings and numbers are slightly different. In this case, the 10th ranking movie is also different vetween the sites. Situations like this are rare. When looking at more recent releases (e.g. within the last two weeks), there will be more differences. These differences will disappear (at least for the most part) as time goes on.</p>
+<p>The results are close. Some movie name spellings and numbers are slightly different. In this case, the 10th ranking movie is also different between the sites. Situations like this are rare. When looking at more recent releases (e.g. within the last two weeks), there will be more differences. These differences will disappear (at least for the most part) as time goes on.</p>
 
 
 
