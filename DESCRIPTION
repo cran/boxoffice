@@ -1,6 +1,6 @@
 Package: boxoffice
 Title: Downloads Box Office Information for Given Dates
-Version: 1.2.1
+Version: 1.2.2
 Authors@R: person("Jacob", "Kaplan", email = "jkkaplan6@gmail.com", role = c("aut", "cre"))
 Description: Download daily box office information (how much each movie earned
     in theaters) using data from either Box Office Mojo (<http://www.boxofficemojo.com/>) or
@@ -14,8 +14,8 @@ Suggests: testthat, knitr, covr, rmarkdown, spelling
 VignetteBuilder: knitr
 Language: en-US
 NeedsCompilation: no
-Packaged: 2019-01-16 13:32:02 UTC; user
+Packaged: 2019-04-20 23:48:10 UTC; user
 Author: Jacob Kaplan [aut, cre]
 Maintainer: Jacob Kaplan <jkkaplan6@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-01-16 13:50:09 UTC
+Date/Publication: 2019-04-21 04:10:04 UTC
