@@ -1,3 +1,13 @@
+# boxoffice
+
+* 1.3.0
+
+* Fix package not working as boxofficemojo.com changed their site organization.
+
+# boxoffice 1.2.3
+
+* Fix tests due to site updating box office totals.
+
 # boxoffice 1.2.2
 
 * Fix tests due to site updating box office totals.
